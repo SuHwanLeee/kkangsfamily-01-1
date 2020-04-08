@@ -797,16 +797,31 @@ async def JointheVC(VCchannel, TXchannel):
 #사다리함수		
 async def LadderFunc(number, ladderlist, channelVal):
 	if number < len(ladderlist):
-		result_ladder = random.sample(ladderlist, number)
-		result_ladderSTR = ','.join(map(str, result_ladder))
-		embed = discord.Embed(
+		if "이선생" in ladderlist :
+			print(ladderlist)
+			ladderlist.remove("이선생")
+			print(ladderlist)
+			result_ladder = random.sample(ladderlist, number-1)
+			result_ladder.append("이선생")
+			result_ladderSTR = ','.join(map(str, result_ladder))
+			embed = discord.Embed(
+				title = "----- 당첨! -----",
+				description= '```' + result_ladderSTR + '```',
+				color=0xff00ff
+				)
+			await channelVal.send(embed=embed, tts=False)
+		else:
+			result_ladder = random.sample(ladderlist, number)
+			result_ladderSTR = ','.join(map(str, result_ladder))
+			embed = discord.Embed(
 			title = "----- 당첨! -----",
 			description= '```' + result_ladderSTR + '```',
 			color=0xff00ff
 			)
-		await channelVal.send(embed=embed, tts=False)
+			await channelVal.send(embed=embed, tts=False)
 	else:
 		await channelVal.send('```추첨인원이 총 인원과 같거나 많습니다. 재입력 해주세요```', tts=False)
+
 
 #킬초기화
 async def initkill_list():
@@ -944,38 +959,38 @@ while True:
 	async def menu_(ctx):
 		if ctx.message.channel.id == basicSetting[7]:
 			command_list = ''
-			command_list += ','.join(command[1]) + '\n'     #/설정확인
-			command_list += ','.join(command[2]) + '\n'     #/채널확인
-			command_list += ','.join(command[3]) + ' [채널명]\n'     #/채널이동
-			command_list += ','.join(command[4]) + '\n'     #/소환
-			command_list += ','.join(command[5]) + '\n'     #/불러오기
-			command_list += ','.join(command[6]) + '\n'     #/초기화
-			command_list += ','.join(command[7]) + '\n'     #/명치
-			command_list += ','.join(command[8]) + '\n'     #/재시작
-			command_list += ','.join(command[9]) + '\n'     #/미예약
-			command_list += ','.join(command[10]) + ' [인원] [금액]\n'     #/분배
-			command_list += ','.join(command[11]) + ' [뽑을인원수] [아이디1] [아이디2]...\n'     #/사다리
-			command_list += ','.join(command[25]) + ' [아이디1] [아이디2]...(최대 12명)\n'     #/경주
-			command_list += ','.join(command[12]) + ' [아이디]\n'     #/정산
-			command_list += ','.join(command[13]) + ' 또는 ' + ','.join(command[14]) + ' 0000, 00:00\n'     #/보스일괄
-			command_list += ','.join(command[14]) + '\n'     #/q
-			command_list += ','.join(command[15]) + ' [할말]\n'     #/v
-			command_list += ','.join(command[16]) + '\n'     #/리젠
-			command_list += ','.join(command[17]) + '\n'     #/현재시간
-			command_list += ','.join(command[22]) + '\n'     #/킬초기화
-			command_list += ','.join(command[23]) + '\n'     #/킬횟수 확인
-			command_list += ','.join(command[23]) + ' [아이디]\n'     #/킬
-			command_list += ','.join(command[24]) + ' [아이디]\n'     #/킬삭제
-			command_list += ','.join(command[18]) + '\n'     #/공지
-			command_list += ','.join(command[18]) + ' [공지내용]\n'     #/공지
-			command_list += ','.join(command[26]) + '\n'     #/공지삭제
-			command_list += ','.join(command[19]) + ' [할말]\n\n'     #/상태
+			command_list += ','.join(command[1]) + '\n'     #!설정확인
+			command_list += ','.join(command[2]) + '\n'     #!채널확인
+			command_list += ','.join(command[3]) + ' [채널명]\n'     #!채널이동
+			command_list += ','.join(command[4]) + '\n'     #!소환
+			command_list += ','.join(command[5]) + '\n'     #!불러오기
+			command_list += ','.join(command[6]) + '\n'     #!초기화
+			command_list += ','.join(command[7]) + '\n'     #!명치
+			command_list += ','.join(command[8]) + '\n'     #!재시작
+			command_list += ','.join(command[9]) + '\n'     #!미예약
+			command_list += ','.join(command[10]) + ' [인원] [금액]\n'     #!분배
+			command_list += ','.join(command[11]) + ' [뽑을인원수] [아이디1] [아이디2]...\n'     #!사다리
+			command_list += ','.join(command[25]) + ' [아이디1] [아이디2]...(최대 12명)\n'     #!경주
+			command_list += ','.join(command[12]) + ' [아이디]\n'     #!정산
+			command_list += ','.join(command[13]) + ' 또는 ' + ','.join(command[14]) + ' 0000, 00:00\n'     #!보스일괄
+			command_list += ','.join(command[14]) + '\n'     #!q
+			command_list += ','.join(command[15]) + ' [할말]\n'     #!v
+			command_list += ','.join(command[16]) + '\n'     #!리젠
+			command_list += ','.join(command[17]) + '\n'     #!현재시간
+			command_list += ','.join(command[22]) + '\n'     #!킬초기화
+			command_list += ','.join(command[23]) + '\n'     #!킬횟수 확인
+			command_list += ','.join(command[23]) + ' [아이디]\n'     #!킬
+			command_list += ','.join(command[24]) + ' [아이디]\n'     #!킬삭제
+			command_list += ','.join(command[18]) + '\n'     #!공지
+			command_list += ','.join(command[18]) + ' [공지내용]\n'     #!공지
+			command_list += ','.join(command[26]) + '\n'     #!공지삭제
+			command_list += ','.join(command[19]) + ' [할말]\n\n'     #!상태
 			command_list += ','.join(command[20]) + '\n'     #보스탐
-			command_list += ','.join(command[21]) + '\n'     #/보스탐
-			command_list += '[보스명] 컷 또는 [보스명] 컷 0000, 00:00\n'
-			command_list += '[보스명] 멍 또는 [보스명] 멍 0000, 00:00\n'
-			command_list += '[보스명] 예상 또는 [보스명] 예상 0000, 00:00\n'
-			command_list += '[보스명] 삭제\n'
+			command_list += ','.join(command[21]) + '\n'     #!보스탐
+			command_list += '[보스명] 컷 또는 [보스명] 컷 0000, 00:00\n'     
+			command_list += '[보스명] 멍 또는 [보스명] 멍 0000, 00:00\n'     
+			command_list += '[보스명] 예상 또는 [보스명] 예상 0000, 00:00\n' 
+			command_list += '[보스명] 삭제\n'     
 			command_list += '[보스명] 메모 [할말]\n'
 			embed = discord.Embed(
 					title = "----- 명령어 -----",
@@ -1768,7 +1783,7 @@ while True:
 						bossData[i][6] = hello[len(tmp_msg):]
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + bossData[i][6] + ' ] 메모등록 완료>', tts=False)
 						
-					if message.content.startswith(bossData[i][0] +' 메모삭제'):
+					if message.content.startswith(bossData[i][0] +'메모삭제'):
 						
 						bossData[i][6] = ''
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' 메모삭제 완료>', tts=False)
@@ -1885,7 +1900,7 @@ while True:
 											hours, remainder = divmod(total_seconds,60*60)
 											minutes, seconds = divmod(remainder,60)
 
-											result_lefttime += '다음 ' + ouput_bossData[i][0] + '타임 까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
+											result_lefttime += '다음 ' + ouput_bossData[i][0] + '탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 							else :
 								for j in range(len(sorted_datelist)):
 									for i in range(len(ouput_bossData)):						
@@ -1896,7 +1911,7 @@ while True:
 											hours, remainder = divmod(total_seconds,60*60)
 											minutes, seconds = divmod(remainder,60)
 
-											result_lefttime += '다음 ' + ouput_bossData[i][0] + '타임 까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
+											result_lefttime += '다음 ' + ouput_bossData[i][0] + '탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 							embed = discord.Embed(
 								description= result_lefttime,
 								color=0xff0000
@@ -1996,11 +2011,11 @@ while True:
 								aa.append(bossData[i][0])		                     #output_bossData[0] : 보스명
 								if bossMungFlag[i] == True :
 									aa.append(tmp_bossTime[i])                       #output_bossData[1] : 시간
-									aa.append(tmp_bossTime[i].strftime('%H:%M'))  #output_bossData[2] : 시간(00:00:00) -> 초빼기 : aa.append(tmp_bossTime[i].strftime('%H:%M'))
+									aa.append(tmp_bossTime[i].strftime('%H:%M'))  #output_bossData[2] : 시간(00:00:00) -> 초빼기 : aa.append(tmp_bossTime[i].strftime('%H:%M'))  
 									aa.append('-')	                                 #output_bossData[3] : -
 								else :
 									aa.append(bossTime[i])                           #output_bossData[1] : 시간
-									aa.append(bossTime[i].strftime('%H:%M'))      #output_bossData[2] : 시간(00:00:00) -> 초빼기 : aa.append(bossTime[i].strftime('%H:%M'))
+									aa.append(bossTime[i].strftime('%H:%M'))      #output_bossData[2] : 시간(00:00:00) -> 초빼기 : aa.append(bossTime[i].strftime('%H:%M'))  
 									aa.append('+')	                                 #output_bossData[3] : +
 								aa.append(bossData[i][2])                            #output_bossData[4] : 멍/미입력 보스
 								aa.append(bossMungCnt[i])	                         #output_bossData[5] : 멍/미입력횟수
@@ -2312,7 +2327,7 @@ while True:
 					await PlaySound(voice_client1, './sound/언니.mp3')
 				if message.content == '/형' :
 					await PlaySound(voice_client1, './sound/형.mp3')
-				if message.content == '/TJ' or message.content == '/tj' :
+				if message.content == '/TJ' or message.content == '!tj' :
 					resultTJ = random.randrange(1,9)
 					await PlaySound(voice_client1, './sound/TJ' + str(resultTJ) +'.mp3')
 
