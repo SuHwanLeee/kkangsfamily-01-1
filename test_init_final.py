@@ -797,28 +797,14 @@ async def JointheVC(VCchannel, TXchannel):
 #사다리함수		
 async def LadderFunc(number, ladderlist, channelVal):
 	if number < len(ladderlist):
-		if "이선생" in ladderlist :
-			print(ladderlist)
-			ladderlist.remove("이선생")
-			print(ladderlist)
-			result_ladder = random.sample(ladderlist, number-1)
-			result_ladder.append("이선생")
-			result_ladderSTR = ','.join(map(str, result_ladder))
-			embed = discord.Embed(
-				title = "----- 당첨! -----",
-				description= '```' + result_ladderSTR + '```',
-				color=0xff00ff
-				)
-			await channelVal.send(embed=embed, tts=False)
-		else:
-			result_ladder = random.sample(ladderlist, number)
-			result_ladderSTR = ','.join(map(str, result_ladder))
-			embed = discord.Embed(
+		result_ladder = random.sample(ladderlist, number)
+		result_ladderSTR = ','.join(map(str, result_ladder))
+		embed = discord.Embed(
 			title = "----- 당첨! -----",
 			description= '```' + result_ladderSTR + '```',
 			color=0xff00ff
 			)
-			await channelVal.send(embed=embed, tts=False)
+		await channelVal.send(embed=embed, tts=False)
 	else:
 		await channelVal.send('```추첨인원이 총 인원과 같거나 많습니다. 재입력 해주세요```', tts=False)
 
