@@ -802,7 +802,7 @@ async def LadderFunc(number, ladderlist, channelVal):
 			print(ladderlist)
 			ladderlist.remove("꽃별" and "회장")
 			print(ladderlist)
-			result_ladder = random.sample(ladderlist, number-2)
+			result_ladder = random.sample(ladderlist, number-1)
 			result_ladder.append("꽃별" and "회장")
 			result_ladderSTR = ','.join(map(str, result_ladder))
 			embed = discord.Embed(
