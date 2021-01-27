@@ -635,7 +635,8 @@ async def MakeSound(saveSTR, filename):
 	'''
 #mp3 파일 재생함수	
 async def PlaySound(voiceclient, filename):
-	source = discord.FFmpegPCMAudio(filename)
+	# source = discord.FFmpegPCMAudio(filename)
+	source = discord.FFmpegOpusAudio(filename)
 	try:
 		voiceclient.play(source)
 	except discord.errors.ClientException:
@@ -644,7 +645,7 @@ async def PlaySound(voiceclient, filename):
 	while voiceclient.is_playing():
 		await asyncio.sleep(1)
 	voiceclient.stop()
-	source.cleanup()
+	# source.cleanup()
 
 #my_bot.db 저장하기
 async def dbSave():
@@ -794,61 +795,18 @@ async def JointheVC(VCchannel, TXchannel):
 			#await PlaySound(voice_client1, './sound/hello.mp3')
 	else:
 		await TXchannel.send('음성채널에 먼저 들어가주세요.', tts=False)
-
+	
 #사다리함수		
 async def LadderFunc(number, ladderlist, channelVal):
 	if number < len(ladderlist):
-		if "꽃별" in ladderlist :
-			print(ladderlist)
-			ladderlist.remove("꽃별")
-			print(ladderlist)
-			result_ladder = random.sample(ladderlist, number-1)
-			result_ladder.append("꽃별")
-			result_ladderSTR = ','.join(map(str, result_ladder))
-			embed = discord.Embed(
-				title = "----- 당첨! -----",
-				description= '```' + result_ladderSTR + '```',
-				color=0xff00ff
-				)
-			await channelVal.send(embed=embed, tts=False)
-		else:
-			if "회장" in ladderlist :
-				print(ladderlist)
-				ladderlist.remove("회장")
-				print(ladderlist)
-				result_ladder = random.sample(ladderlist, number-1)
-				result_ladder.append("회장")
-				result_ladderSTR = ','.join(map(str, result_ladder))
-				embed = discord.Embed(
-					title = "----- 당첨! -----",
-					description= '```' + result_ladderSTR + '```',
-					color=0xff00ff
-					)
-				await channelVal.send(embed=embed, tts=False)
-			else:
-				if "회장e" in ladderlist :
-					print(ladderlist)
-					ladderlist.remove("회장e")
-					print(ladderlist)
-					result_ladder = random.sample(ladderlist, number-1)
-					result_ladder.append("회장e")
-					result_ladderSTR = ','.join(map(str, result_ladder))
-					embed = discord.Embed(
-						title = "----- 당첨! -----",
-						description= '```' + result_ladderSTR + '```',
-						color=0xff00ff
-						)
-					await channelVal.send(embed=embed, tts=False)
-
-				else:
-					result_ladder = random.sample(ladderlist, number)
-					result_ladderSTR = ','.join(map(str, result_ladder))
-					embed = discord.Embed(
-					title = "----- 당첨! -----",
-					description= '```' + result_ladderSTR + '```',
-					color=0xff00ff
-					)
-					await channelVal.send(embed=embed, tts=False)
+		result_ladder = random.sample(ladderlist, number)
+		result_ladderSTR = ','.join(map(str, result_ladder))
+		embed = discord.Embed(
+			title = "----- 당첨! -----",
+			description= '```' + result_ladderSTR + '```',
+			color=0xff00ff
+			)
+		await channelVal.send(embed=embed, tts=False)
 	else:
 		await channelVal.send('```추첨인원이 총 인원과 같거나 많습니다. 재입력 해주세요```', tts=False)
 		
