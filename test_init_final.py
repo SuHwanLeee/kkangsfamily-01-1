@@ -1873,7 +1873,10 @@ class mainCog(commands.Cog):
 
 	################ 사다리 결과 출력 ################ 
 	@commands.command(name=command[12][0], aliases=command[12][1:])
-	async def ladder_(ctx, *, msg :str):
+	async def ladder_(self, ctx : commands.Context, *, args : str = None):
+		if basicSetting[8] != "" and ctx.message.channel.id == basicSetting[7]:
+			return
+
 		if ctx.message.channel.id == basicSetting[7] or ctx.message.channel.id == basicSetting[8]:
 			ladder = []
 			ladder = msg.split(" ")
