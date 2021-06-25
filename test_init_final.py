@@ -1873,7 +1873,7 @@ class mainCog(commands.Cog):
 
 	################ 사다리 결과 출력 ################ 
 	@commands.command(name=command[12][0], aliases=command[12][1:])
-	async def ladder_(self, ctx : commands.Context, *, args : str = None):
+	async def ladder_(self, ctx : commands.Context, *, msg : str = None):
 		if basicSetting[8] != "" and ctx.message.channel.id == basicSetting[7]:
 			return
 
